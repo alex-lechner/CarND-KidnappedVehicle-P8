@@ -46,7 +46,7 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
     //  http://www.cplusplus.com/reference/random/default_random_engine/
 
     normal_distribution<double> dist_x(0, std_pos[0]), dist_y(0, std_pos[1]), dist_theta(0, std_pos[2]);
-    double velo_del = velocity * delta_t, velo_yaw = velocity / yaw_rate, yaw_del = yaw_rate * delta_t;
+    const double velo_del = velocity * delta_t, velo_yaw = velocity / yaw_rate, yaw_del = yaw_rate * delta_t;
 
     for (Particle &p : particles) {
 
@@ -106,8 +106,8 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
     //   3.33
     //   http://planning.cs.uiuc.edu/node99.html
 
-    double x_map, y_map, exponent = 0.0,
-            gauss_norm = (1 / (2 * M_PI * std_landmark[0] * std_landmark[1])),
+    double x_map, y_map, exponent = 0.0;
+    const double gauss_norm = (1 / (2 * M_PI * std_landmark[0] * std_landmark[1])),
             sig_x_two = pow(std_landmark[0], 2),
             sig_y_two = pow(std_landmark[1], 2);
 
